@@ -1,11 +1,11 @@
 import * as functions from 'firebase-functions'
 import rp from 'request-promise'
 import cheerio from 'cheerio'
-import { IGetAmazonDetails } from '../../models/functions/getAmazonDetails'
+import { IGetAmazonDetailsFunc } from '../../models/functions/getAmazonDetails'
 
 module.exports = functions
   .region('asia-northeast1')
-  .https.onCall((data: IGetAmazonDetails, context) => {
+  .https.onCall((data: IGetAmazonDetailsFunc, context) => {
     if (
       typeof context.auth !== 'object' ||
       typeof context.auth.uid !== 'string' ||
@@ -29,9 +29,9 @@ module.exports = functions
             .replace(/\n| {2}/g, ''),
           price: Number(
             cheerio
-            .load(response)('#price_inside_buybox')
-            .text()
-            .replace(/\n| |￥|,/g, '')
+              .load(response)('#price_inside_buybox')
+              .text()
+              .replace(/\n| |￥|,/g, '')
           )
         }
       })

@@ -1,3 +1,3 @@
-export interface IGetAmazonDetails {
+export interface IGetAmazonDetailsFunc {
   items: string[]
 }
