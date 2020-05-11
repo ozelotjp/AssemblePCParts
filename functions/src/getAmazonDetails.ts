@@ -27,10 +27,12 @@ module.exports = functions
             .load(response)('#productTitle')
             .text()
             .replace(/\n| {2}/g, ''),
-          price: cheerio
+          price: Number(
+            cheerio
             .load(response)('#price_inside_buybox')
             .text()
             .replace(/\n| |￥|,/g, '')
+          )
         }
       })
     })
